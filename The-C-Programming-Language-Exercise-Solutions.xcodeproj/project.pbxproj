@@ -39,6 +39,7 @@
 		D1447ECC2228F29500DB7CD0 /* 1-9.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "1-9.c"; path = "ch_1/1-9.c"; sourceTree = "<group>"; };
 		D1447ECD2228F29500DB7CD0 /* 1-3-4.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "1-3-4.c"; path = "ch_1/1-3-4.c"; sourceTree = "<group>"; };
 		D1447ECE2228F29500DB7CD0 /* 1-16.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "1-16.c"; path = "ch_1/1-16.c"; sourceTree = "<group>"; };
+		D1A261182228F55B0046773C /* ch_1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ch_1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +56,7 @@
 		D1447EAD2228F23E00DB7CD0 = {
 			isa = PBXGroup;
 			children = (
+				D1A261182228F55B0046773C /* ch_1 */,
 				D1447ECD2228F29500DB7CD0 /* 1-3-4.c */,
 				D1447EC72228F29500DB7CD0 /* 1-7.c */,
 				D1447EC52228F29400DB7CD0 /* 1-8.c */,
