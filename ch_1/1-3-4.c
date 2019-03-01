@@ -3,7 +3,7 @@
  */
 #include <stdio.h>
 
-main()
+main() 
 {
     float fahr, cels;
     int lower, upper, step;
