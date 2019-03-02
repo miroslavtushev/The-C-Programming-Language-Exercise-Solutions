@@ -9,13 +9,9 @@
 
 #define IN_SINGLE       2
 #define IN_MULTI        1
-#define OUT_COMMENT     0
-
 #define IN_STRING       1
-#define OUT_STRING      0
-
 #define IN_CHAR         1
-#define OUT_CHAR        0
+#define OUT             0
 
 int main()
 {
@@ -23,9 +19,9 @@ int main()
     int i = 0;
     char input[MAXSIZE];
     
-    int comment_state   = OUT_COMMENT;
-    int string_state    = OUT_STRING;
-    int char_state      = OUT_CHAR;
+    int comment_state   = OUT;
+    int string_state    = OUT;
+    int char_state      = OUT;
     
     while ((c = getchar()) != EOF)
     {
@@ -43,15 +39,15 @@ int main()
             if (c == '*')
             {
                 if ((c = input[++j]) == '/')
-                    comment_state = OUT_COMMENT;
+                    comment_state = OUT;
             }
         }
         else if (comment_state == IN_SINGLE)
         {
             if (c == '\n')
-                comment_state = OUT_COMMENT;
+                comment_state = OUT;
         }
-        else if (comment_state == OUT_COMMENT && string_state == OUT_STRING && c == '/')
+        else if (comment_state == OUT && string_state == OUT && c == '/')
         {
             c = input[++j];
             if (c == '*')
@@ -79,7 +75,7 @@ int main()
                     c != '?' )
                     printf("Incorrect escape sequence\n");
             }
-            if (string_state == OUT_STRING && char_state == OUT_CHAR)
+            if (string_state == OUT && char_state == OUT)
             {
                 if (c == '"')           string_state = IN_STRING;
                 else if (c == '\'')     char_state = IN_CHAR;
@@ -88,33 +84,41 @@ int main()
                     if (c == '(')
                         ++par;
                     else if (c == ')')
+                    {
                         --par;
+                        if (par < 0) printf("Unbalanced parentheses found\n");
+                    }
                     else if (c == '[')
                         ++brck;
                     else if (c == ']')
+                    {
                         --brck;
+                        if (brck < 0) printf("Unbalanced brackets found\n");
+                    }
                     else if (c == '{')
                         ++brcs;
                     else if (c == '}')
+                    {
                         --brcs;
+                        if (brcs < 0) printf("Unbalanced braces found\n");
+                    }
                 }
             }
-            else if (c == '"' && string_state == IN_STRING && char_state == OUT_CHAR)
-                string_state = OUT_STRING;
-            else if (c == '\'' && char_state == IN_CHAR && string_state == OUT_STRING)
-                char_state = OUT_CHAR;
+            else if (c == '"' && string_state == IN_STRING && char_state == OUT)
+                string_state = OUT;
+            else if (c == '\'' && char_state == IN_CHAR && string_state == OUT)
+                char_state = OUT;
   
         }
         ++j;
     }
     
-    /* Printing */
+    /* Final checks */
     if (string_state == IN_STRING)
         printf("String has not been terminated\n");
     if (char_state == IN_CHAR)
         printf("Character terminal error\n");
-    printf("\n");
-    printf("Unbalanced parentheses found: %d\n", abs(par));
-    printf("Unbalanced brackets found: %d\n", abs(brck));
-    printf("Unbalanced braces found: %d\n", abs(brcs));
+    if (par > 0) printf("Unbalanced parentheses found\n");
+    if (brck > 0) printf("Unbalanced brackets found\n");
+    if (brcs > 0) printf("Unbalanced braces found\n");
 }
