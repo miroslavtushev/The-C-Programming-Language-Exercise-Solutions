@@ -97,6 +97,7 @@ int main()
 				case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
 				case 'y': case 'z':
 					push(vars[97 - type]);
+					break;
 				case '=':
 					recent = pop();
 					printf("\t%.8g\n", recent);
