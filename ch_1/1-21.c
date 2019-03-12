@@ -7,7 +7,7 @@
 #include <stdio.h>
 
 #define MAXSIZE 1000
-#define TAB 2
+#define N 4
 
 void entab(char from[], char to[]);
 int _getline(char s[], int lim);
@@ -28,29 +28,47 @@ main()
 
 void entab(char from[], char to[])
 {
-    int i, j;
-    i = j = 0;
-    while (from[i] != '\0')
-    {
-        while (from[i] == ' ')
-        {
-            if (i < MAXSIZE && from[i+1] == ' ') // 1 char lookahead
-            {
-                to[j++] = '\t';
-                i += 2;
-            }
-            else
-            {
-                to[j++] = ' ';
-                i++;
-            }
-        }
-       
-        to[j] = from[i];
-        i++;
-        j++;
-    }
-    to[j] = '\0';
+	int i, j, jj;
+	i = j = jj = 0;
+	while (from[i] != '\0')
+	{
+		while (from[i] == ' ')
+		{
+			if (i < MAXSIZE && from[i+1] == ' ') // 1 char lookahead
+			{
+				to[j++] = '\t';
+				jj += 2;
+				i += 2;
+			}
+			else //do the alignment to the next tab stop
+			{
+//				to[j++] = ' ';
+//				i++;
+				int k = N-(jj%N);
+				while(k > 0)
+				{
+					if (k >= 2)
+					{
+						to[j++] = '\t';
+						jj += 2;
+						k -= 2;
+					}
+					else
+					{
+						to[j++] = ' ';
+						jj++;
+						k--;
+					}
+				}
+				i++;
+			}
+		}
+		to[j] = from[i];
+		i++;
+		j++;
+		jj++;
+	}
+	to[j] = '\0';
 }
 
 int _getline(char s[], int lim)

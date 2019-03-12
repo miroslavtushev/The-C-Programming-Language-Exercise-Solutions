@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 
-#define N 2
+#define N 4
 #define MAXSIZE 1000
 
 void detab(char from[], char to[]);
@@ -33,10 +33,10 @@ void detab(char from[], char to[])
     {
         if (from[i] == '\t')
         {
-            int jj = j;
-            for (jj; jj < j+N; ++jj)
-                to[jj] = ' ';
-            j = --jj; // save jj's position
+			  int jj = j;
+			  for (int t = 0; t < N-(j%N); ++jj, ++t)
+				  to[jj] = ' ';
+			  j = --jj; // save jj's position
         }
         else
             to[j] = from[i];
