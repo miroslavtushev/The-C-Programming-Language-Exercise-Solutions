@@ -42,8 +42,6 @@ void entab(char from[], char to[])
 			}
 			else //do the alignment to the next tab stop
 			{
-//				to[j++] = ' ';
-//				i++;
 				int k = N-(jj%N);
 				while(k > 0)
 				{
